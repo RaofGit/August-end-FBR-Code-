@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You | Application Received - FBR Tax Consultants</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Dedicated Thank You Page Styles --- */
+        .thanks-wrapper {
+            min-height: 100vh;
+            background: radial-gradient(circle at 50% 10%, #1e3a8a 0%, #040c1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .thanks-card {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(16px);
+            max-width: 650px;
+            width: 100%;
+            border-radius: 28px;
+            padding: 50px 40px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: thanksEntrance 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Success Animated Checkmark Icon */
+        .icon-circle {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #25D366 0%, #1ebd58 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 28px;
+            font-size: 42px;
+            color: #ffffff;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            position: relative;
+        }
+
+        .icon-circle::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid #25D366;
+            animation: pulseRing 2s infinite;
+        }
+
+        .thanks-card h1 {
+            color: #091a33;
+            font-size: 34px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .thanks-card .sub-heading {
+            color: #d97706;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .thanks-card p {
+            color: #475569;
+            font-size: 16.5px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        /* Action Boxes */
+        .next-steps-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 35px;
+            text-align: left;
+        }
+
+        .next-steps-box h4 {
+            color: #091a33;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .next-steps-box h4 i {
+            color: #f59e0b;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: #334155;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .step-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-item i {
+            color: #25D366;
+            font-size: 16px;
+        }
+
+        /* Action Buttons */
+        .thanks-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .btn-wa-direct {
+            background: #25D366;
+            color: #ffffff;
+            padding: 16px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.35);
+            transition: all 0.3s ease;
+        }
+
+        .btn-wa-direct:hover {
+            background: #1ebd58;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5);
+        }
+
+        .btn-home-back {
+            background: transparent;
+            color: #091a33;
+            border: 2px solid #e2e8f0;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-home-back:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+
+        /* Animations */
+        @keyframes thanksEntrance {
+            0% { opacity: 0; transform: scale(0.9) translateY(30px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes pulseRing {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.4); opacity: 0; }
+        }
+
+        @media (max-width: 576px) {
+            .thanks-card { padding: 35px 22px; }
+            .thanks-card h1 { font-size: 26px; }
+            .icon-circle { width: 75px; height: 75px; font-size: 35px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="thanks-wrapper">
+        <div class="thanks-card">
+            
+            <div class="icon-circle">
+                <i class="fa-solid fa-check"></i>
+            </div>
+
+            <span class="sub-heading">Application Received Successfully</span>
+            <h1>Shukriya! Aap Ki Application Hamein Moosool Ho Gayi Hai</h1>
+            
+            <p>Aap ke details FBR Tax Consultancy desk par safely submit kar diye gaye hain. Hamare Senior Tax Expert aglay <strong>30 minutes</strong> ke andar aap se rabta karein ge.</p>
+
+            <div class="next-steps-box">
+                <h4><i class="fa-solid fa-bolt"></i> Agla Marhala Kya Hoga?</h4>
+                <div class="step-item">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Senior consultant aap ki income aur business details analyze karega.</span>
+                </div>
+                <div class="step-item">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>FBR portal updating ke waqt zero upfront hidden charges honge.</span>
+                </div>
+                <div class="step-item">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Active taxpayer status online live verify karwaya jayega.</span>
+                </div>
+            </div>
+
+            <div class="thanks-actions">
+                <a href="https://wa.me/923174807446?text=Hi,%20main%20ne%20apni%20tax%20details%20form%20par%20submit%20ki%20hain.%20Kindly%20process%20fast%20karein." class="btn-wa-direct" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> Fast Response Ke Liye Direct Chat Karein
+                </a>
+                
+                <a href="index.html" class="btn-home-back">
+                    <i class="fa-solid fa-arrow-left"></i> Back To Homepage
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
