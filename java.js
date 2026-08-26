@@ -1,27 +1,62 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // 1. Mobile Responsive Navigation Drawer
+    // 1. Mobile Menu Drawer Toggle
     const mobileMenu = document.getElementById('mobile-menu');
-    const navLinks = document.querySelector('.nav-links');
+    const navMenu = document.getElementById('nav-menu');
 
-    if(mobileMenu) {
-        mobileMenu.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
+    if (mobileMenu && navMenu) {
+        mobileMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!navMenu.contains(e.target) && !mobileMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+            }
         });
     }
 
-    // Close menu when clicking link (Mobile UX)
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            if(navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
+    // 2. Navigation Smooth Scrolling & Active State
+    const navItems = document.querySelectorAll('.nav-links a.nav-item');
+    navItems.forEach(item => {
+        item.addEventListener('click', function() {
+            navItems.forEach(link => link.classList.remove('active'));
+            this.classList.add('active');
+            if (navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
             }
         });
     });
 
-    // 2. Form Submission via FormSubmit API
+    // 3. Whole-Card Clickable Service Integration
+    const clickableCards = document.querySelectorAll('.clickable-card');
+    const serviceSelect = document.getElementById('serviceRequired');
+
+    clickableCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const selectedService = this.getAttribute('data-service');
+            
+            if (serviceSelect && selectedService) {
+                for (let i = 0; i < serviceSelect.options.length; i++) {
+                    if (serviceSelect.options[i].value === selectedService) {
+                        serviceSelect.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+
+            const appointmentSection = document.getElementById('appointment');
+            if (appointmentSection) {
+                appointmentSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    // 4. Client Form Submission Handling
     const taxForm = document.getElementById('clientTaxForm');
-    if(taxForm) {
+    if (taxForm) {
         taxForm.addEventListener('submit', function(e) {
             e.preventDefault(); 
             
@@ -36,24 +71,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 method: 'POST',
                 body: formData,
             }).then(response => {
-                if(response.ok) {
+                if (response.ok) {
                     window.location.href = "thanks.html";
                 } else {
-                    alert("Submission error. Please try submitting again.");
-                    btn.innerText = "Submit Details";
+                    alert("Submission Error. Please retry.");
+                    btn.innerText = "Submit Form Details";
                     btn.disabled = false;
                 }
             }).catch(error => {
                 alert("Network error! Please check your internet connection.");
-                btn.innerText = "Submit Details";
+                btn.innerText = "Submit Form Details";
                 btn.disabled = false;
             });
         });
     }
 
-    // 3. Automated WhatsApp Formatting & Direct Dispatch
+    // 5. WhatsApp Direct Message Pre-formatter
     const whatsappBtn = document.getElementById('whatsappDirectBtn');
-    if(whatsappBtn) {
+    if (whatsappBtn) {
         whatsappBtn.addEventListener('click', function() {
             const name = document.getElementById('clientName').value.trim();
             const phone = document.getElementById('clientPhone').value.trim();
@@ -61,18 +96,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const service = document.getElementById('serviceRequired').value;
             const message = document.getElementById('clientMessage').value.trim();
 
-            if(!name || !phone || !service) {
-                alert("Please fill in your Name, Phone Number, and Required Service before sending to WhatsApp!");
+            if (!name || !phone || !service) {
+                alert("Kindly fill in your Name, Phone Number, and Service first.");
                 return; 
             }
 
-            let whatsappText = `*NEW TAX CLIENT CONSULTATION INQUIRY*\n\n`;
-            whatsappText += `👤 *Client Name:* ${name}\n`;
+            let whatsappText = `*TAX YEAR 2026 CONSULTATION INQUIRY*\n\n`;
+            whatsappText += `👤 *Name:* ${name}\n`;
             whatsappText += `📞 *Phone:* ${phone}\n`;
-            if (cnic) { whatsappText += `💳 *CNIC:* ${cnic}\n`; }
-            whatsappText += `📋 *Service Selected:* ${service}\n`;
+            if (cnic) { whatsappText += `💳 *CNIC/Business:* ${cnic}\n`; }
+            whatsappText += `📋 *Service Needed:* ${service}\n`;
             if (message) { whatsappText += `💬 *Query Details:* ${message}\n`; }
-            whatsappText += `\n-------------------------------\nSent from Official Tax Portal`;
+            whatsappText += `\n-------------------------------\nSent from FBR Tax Advisory Portal`;
 
             const encodedText = encodeURIComponent(whatsappText);
             const whatsappNumber = "923174807446"; 
